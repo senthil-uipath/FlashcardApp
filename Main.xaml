@@ -1,4 +1,4 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="Main" mva:VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="1312,1124.8" sap2010:WorkflowViewState.IdRef="ActivityBuilder_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:f="clr-namespace:FlashcardApp;assembly=DataService.FlashcardApp" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:uda="clr-namespace:UiPath.DataService.Activities;assembly=UiPath.DataService.Activities.Core" xmlns:ufa="clr-namespace:UiPath.Form.Activities;assembly=UiPath.Form.Activities" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="Main" mva:VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="607.555555555556,1912" sap2010:WorkflowViewState.IdRef="ActivityBuilder_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:f="clr-namespace:FlashcardApp;assembly=DataService.FlashcardApp" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:uda="clr-namespace:UiPath.DataService.Activities;assembly=UiPath.DataService.Activities.Core" xmlns:ufa="clr-namespace:UiPath.Form.Activities;assembly=UiPath.Form.Activities" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="32">
       <x:String>System.Activities</x:String>
@@ -36,7 +36,7 @@
     </scg:List>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
-    <scg:List x:TypeArguments="AssemblyReference" Capacity="33">
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="35">
       <AssemblyReference>System.Activities</AssemblyReference>
       <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
       <AssemblyReference>mscorlib</AssemblyReference>
@@ -69,31 +69,36 @@
       <AssemblyReference>UiPath.Callout.Activity</AssemblyReference>
       <AssemblyReference>UiPath.Mail.Activities</AssemblyReference>
       <AssemblyReference>UiPath.OCR.Activities</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
       <AssemblyReference>DataService.FlashcardApp</AssemblyReference>
+      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap:VirtualizedContainerService.HintSize="616.8,920" sap2010:WorkflowViewState.IdRef="Sequence_2">
+  <Sequence sap:VirtualizedContainerService.HintSize="617.777777777778,1747.11111111111" sap2010:WorkflowViewState.IdRef="Sequence_2">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="button" />
       <Variable x:TypeArguments="x:String" Name="answer" />
       <Variable x:TypeArguments="x:String" Default="question_text" Name="question" />
       <Variable x:TypeArguments="x:Boolean" Default="True" Name="isBeforeAnswer" />
-      <Variable x:TypeArguments="scg:IList(f:FlashcardApp)" Name="allQuestions" />
+      <Variable x:TypeArguments="scg:IList(f:FlashcardApp)" Name="cards" />
+      <Variable x:TypeArguments="x:Int32" Name="currentCard" />
+      <Variable x:TypeArguments="x:String" Name="variable1" />
+      <Variable x:TypeArguments="x:Int32" Name="totalCards" />
+      <Variable x:TypeArguments="x:String" Name="goodInterval" />
+      <Variable x:TypeArguments="x:String" Name="easyInterval" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <uda:QueryEntityRecords x:TypeArguments="f:FlashcardApp" TotalRecords="{x:Null}" ContinueOnError="False" DisplayName="Query Entity Records" ExpansionDepth="2" sap:VirtualizedContainerService.HintSize="575.2,224.8" sap2010:WorkflowViewState.IdRef="QueryEntityRecords`1_1" OutputRecords="[allQuestions]" Skip="0" SortAscending="True" SortByField="Id" TimeoutInMs="30000" Top="100">
+    <uda:QueryEntityRecords x:TypeArguments="f:FlashcardApp" TotalRecords="{x:Null}" ContinueOnError="False" DisplayName="Query Entity Records" ExpansionDepth="2" sap:VirtualizedContainerService.HintSize="576,224.444444444444" sap2010:WorkflowViewState.IdRef="QueryEntityRecords`1_1" OutputRecords="[cards]" Skip="0" SortAscending="True" SortByField="Id" TimeoutInMs="30000" Top="100">
       <uda:QueryEntityRecords.FilterArguments>
         <uda:FilterArgument FilterActivityType="f:FlashcardApp">
           <uda:FilterArgument.Filter>
             <uda:GroupFilter Operator="and">
               <uda:GroupFilter.Filters>
-                <scg:List x:TypeArguments="uda:SimpleFilter" Capacity="4">
-                  <uda:SimpleFilter ExpressionValue="{x:Null}" ValueIndex="{x:Null}" FieldName="question" FieldType="System.String" Operator="not empty" />
-                </scg:List>
+                <scg:List x:TypeArguments="uda:SimpleFilter" Capacity="0" />
               </uda:GroupFilter.Filters>
               <uda:GroupFilter.Groups>
                 <scg:List x:TypeArguments="uda:GroupFilter" Capacity="0" />
@@ -106,24 +111,73 @@
         <scg:List x:TypeArguments="InArgument" Capacity="0" />
       </uda:QueryEntityRecords.FilterValues>
     </uda:QueryEntityRecords>
-    <ufa:FormActivity Dismissed="{x:Null}" FormFieldsInputData="{x:Null}" FormFieldsOutputData="{x:Null}" FormTitle="{x:Null}" TimeoutInSeconds="{x:Null}" WindowPositionLeft="{x:Null}" WindowPositionTop="{x:Null}" DisableMaximizeButton="False" DisableMinimizeButton="False" DisplayName="Create Form" FormHeight="400" FormSchema="%[{&quot;label&quot;:&quot;HTML&quot;,&quot;tag&quot;:&quot;div&quot;,&quot;className&quot;:&quot;title&quot;,&quot;attrs&quot;:[{&quot;attr&quot;:&quot;&quot;,&quot;value&quot;:&quot;&quot;}],&quot;content&quot;:&quot;&lt;h1&gt;&lt;b&gt;💫UiPath Anki💫&lt;/b&gt;&lt;/h1&gt;&quot;,&quot;refreshOnChange&quot;:false,&quot;key&quot;:&quot;html&quot;,&quot;type&quot;:&quot;htmlelement&quot;,&quot;calculateServer&quot;:false,&quot;input&quot;:false,&quot;tableView&quot;:false},{&quot;components&quot;:[{&quot;label&quot;:&quot;Decks&quot;,&quot;key&quot;:&quot;decks&quot;,&quot;components&quot;:[{&quot;label&quot;:&quot;HTML&quot;,&quot;tag&quot;:&quot;h2&quot;,&quot;className&quot;:&quot;question&quot;,&quot;attrs&quot;:[{&quot;attr&quot;:&quot;&quot;,&quot;value&quot;:&quot;&quot;}],&quot;content&quot;:&quot;{{data.question}}&quot;,&quot;refreshOnChange&quot;:true,&quot;key&quot;:&quot;question&quot;,&quot;type&quot;:&quot;htmlelement&quot;,&quot;calculateServer&quot;:false,&quot;input&quot;:false,&quot;tableView&quot;:false},{&quot;label&quot;:&quot;HTML&quot;,&quot;tag&quot;:&quot;h2&quot;,&quot;className&quot;:&quot;answer&quot;,&quot;attrs&quot;:[{&quot;attr&quot;:&quot;&quot;,&quot;value&quot;:&quot;&quot;}],&quot;content&quot;:&quot;{{data.answer}}&quot;,&quot;refreshOnChange&quot;:true,&quot;key&quot;:&quot;answerField&quot;,&quot;type&quot;:&quot;htmlelement&quot;,&quot;calculateServer&quot;:false,&quot;input&quot;:false,&quot;tableView&quot;:false},{&quot;columns&quot;:[{&quot;components&quot;:[{&quot;label&quot;:&quot;Edit&quot;,&quot;disableOnInvalid&quot;:true,&quot;tableView&quot;:false,&quot;key&quot;:&quot;edit&quot;,&quot;properties&quot;:{&quot;closeOnSubmit&quot;:&quot;false&quot;},&quot;custom&quot;:&quot;instance.emit('executeDoBlock', instance.component);&quot;,&quot;type&quot;:&quot;button&quot;,&quot;input&quot;:true,&quot;calculateServer&quot;:false,&quot;hideOnChildrenHidden&quot;:false,&quot;width&quot;:12}],&quot;width&quot;:4,&quot;offset&quot;:0,&quot;push&quot;:0,&quot;pull&quot;:0,&quot;size&quot;:&quot;xs&quot;},{&quot;components&quot;:[{&quot;label&quot;:&quot;Show Answer&quot;,&quot;disableOnInvalid&quot;:true,&quot;tableView&quot;:false,&quot;key&quot;:&quot;showAnswer&quot;,&quot;properties&quot;:{&quot;closeOnSubmit&quot;:&quot;false&quot;},&quot;customConditional&quot;:&quot;show = data.isBeforeAnswer;&quot;,&quot;custom&quot;:&quot;instance.emit('executeDoBlock', instance.component);&quot;,&quot;type&quot;:&quot;button&quot;,&quot;input&quot;:true,&quot;calculateServer&quot;:false,&quot;hideOnChildrenHidden&quot;:false,&quot;width&quot;:6},{&quot;columns&quot;:[{&quot;components&quot;:[{&quot;label&quot;:&quot;Again&quot;,&quot;disableOnInvalid&quot;:true,&quot;tableView&quot;:false,&quot;key&quot;:&quot;review_again&quot;,&quot;properties&quot;:{&quot;closeOnSubmit&quot;:&quot;false&quot;},&quot;custom&quot;:&quot;instance.emit('executeDoBlock', instance.component);&quot;,&quot;type&quot;:&quot;button&quot;,&quot;input&quot;:true,&quot;calculateServer&quot;:false,&quot;hideOnChildrenHidden&quot;:false,&quot;width&quot;:12}],&quot;width&quot;:3,&quot;offset&quot;:0,&quot;push&quot;:0,&quot;pull&quot;:0,&quot;size&quot;:&quot;xs&quot;},{&quot;components&quot;:[{&quot;label&quot;:&quot;Good&quot;,&quot;disableOnInvalid&quot;:true,&quot;tableView&quot;:false,&quot;key&quot;:&quot;review_good&quot;,&quot;properties&quot;:{&quot;closeOnSubmit&quot;:&quot;false&quot;},&quot;custom&quot;:&quot;instance.emit('executeDoBlock', instance.component);&quot;,&quot;type&quot;:&quot;button&quot;,&quot;input&quot;:true,&quot;calculateServer&quot;:false,&quot;hideOnChildrenHidden&quot;:false,&quot;width&quot;:12}],&quot;width&quot;:3,&quot;offset&quot;:0,&quot;push&quot;:0,&quot;pull&quot;:0,&quot;size&quot;:&quot;xs&quot;},{&quot;components&quot;:[{&quot;label&quot;:&quot;review_easy&quot;,&quot;disableOnInvalid&quot;:true,&quot;tableView&quot;:false,&quot;key&quot;:&quot;easy&quot;,&quot;properties&quot;:{&quot;closeOnSubmit&quot;:&quot;false&quot;},&quot;custom&quot;:&quot;instance.emit('executeDoBlock', instance.component);&quot;,&quot;type&quot;:&quot;button&quot;,&quot;input&quot;:true,&quot;calculateServer&quot;:false,&quot;hideOnChildrenHidden&quot;:false,&quot;width&quot;:12}],&quot;size&quot;:&quot;xs&quot;,&quot;width&quot;:3,&quot;offset&quot;:0,&quot;push&quot;:0,&quot;pull&quot;:0}],&quot;tableView&quot;:false,&quot;key&quot;:&quot;columns2&quot;,&quot;customConditional&quot;:&quot;show = !data.isBeforeAnswer;&quot;,&quot;type&quot;:&quot;columns&quot;,&quot;calculateServer&quot;:false,&quot;input&quot;:false,&quot;label&quot;:&quot;Columns&quot;,&quot;width&quot;:6}],&quot;width&quot;:4,&quot;offset&quot;:0,&quot;push&quot;:0,&quot;pull&quot;:0,&quot;size&quot;:&quot;xs&quot;},{&quot;components&quot;:[{&quot;label&quot;:&quot;More ▼&quot;,&quot;disableOnInvalid&quot;:true,&quot;tableView&quot;:false,&quot;key&quot;:&quot;more&quot;,&quot;properties&quot;:{&quot;closeOnSubmit&quot;:&quot;false&quot;},&quot;custom&quot;:&quot;instance.emit('executeDoBlock', instance.component);&quot;,&quot;type&quot;:&quot;button&quot;,&quot;input&quot;:true,&quot;calculateServer&quot;:false,&quot;hideOnChildrenHidden&quot;:false,&quot;width&quot;:12}],&quot;size&quot;:&quot;xs&quot;,&quot;width&quot;:4,&quot;offset&quot;:0,&quot;push&quot;:0,&quot;pull&quot;:0}],&quot;autoAdjust&quot;:true,&quot;tableView&quot;:false,&quot;key&quot;:&quot;columns&quot;,&quot;type&quot;:&quot;columns&quot;,&quot;calculateServer&quot;:false,&quot;input&quot;:false,&quot;label&quot;:&quot;Columns&quot;}]},{&quot;label&quot;:&quot;Add&quot;,&quot;key&quot;:&quot;add&quot;,&quot;components&quot;:[]},{&quot;label&quot;:&quot;Browse&quot;,&quot;key&quot;:&quot;browse&quot;,&quot;components&quot;:[]},{&quot;label&quot;:&quot;Status&quot;,&quot;key&quot;:&quot;status&quot;,&quot;components&quot;:[]},{&quot;label&quot;:&quot;Sysnc&quot;,&quot;key&quot;:&quot;sysnc&quot;,&quot;components&quot;:[]}],&quot;key&quot;:&quot;tabs1&quot;,&quot;type&quot;:&quot;tabs&quot;,&quot;input&quot;:false,&quot;tableView&quot;:false,&quot;label&quot;:&quot;Tabs&quot;,&quot;calculateServer&quot;:false},{&quot;label&quot;:&quot;HTML&quot;,&quot;tag&quot;:&quot;style&quot;,&quot;attrs&quot;:[{&quot;attr&quot;:&quot;&quot;,&quot;value&quot;:&quot;&quot;}],&quot;content&quot;:&quot;.title {text-align: center;}\n.question {color: #414244;}\n.answer {color: #0067DF;}&quot;,&quot;refreshOnChange&quot;:false,&quot;key&quot;:&quot;html1&quot;,&quot;type&quot;:&quot;htmlelement&quot;,&quot;calculateServer&quot;:false,&quot;input&quot;:false,&quot;tableView&quot;:false}]" FormTheme="{}{&quot;Activities&quot;:[&quot;FORMS&quot;],&quot;Id&quot;:&quot;1621561435831&quot;,&quot;Name&quot;:&quot;Orchestrator&quot;,&quot;BaseCss&quot;:&quot;../../assets/css/themes/paper.bootstrap.min.css&quot;,&quot;ImageSrc&quot;:&quot;../../assets/themeicons/paper.png&quot;,&quot;OverrideCssUrl&quot;:&quot;&quot;,&quot;UserStyleOverrides&quot;:&quot;body , h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {\n                      font-family : Roboto !important;\n                    }table, .btn, .form-control {\n                      font-size : 13px !important;\n                     }h1 {\n                      font-size : 35px !important;\n                    }h2 {\n                      font-size : 29px !important;\n                    }h3 {\n                      font-size : 23px !important;\n                    }h4 {\n                      font-size : 17px !important;\n                    }h5 {\n                      font-size : 13px !important;\n                    }h6 {\n                      font-size : 11px !important;\n                    }body {\n      background:  #f1f6f8 !important;\n      font-size : 13px !important;\n      font-family : Roboto !important;\n      color : #666666 !important\n    } .panel-default {\n                        background:   !important;\n                        border-color :   !important;\n                      }\n                 .panel-default &gt; .panel-heading {\n                        background-color:  !important;\n                        color : #666666 !important\n                      }.btn-primary {\n                          background:  #2196f3 !important;\n                          border-color:  #ffffff !important;\n                          color:  #ffffff !important;\n                      } .btn-primary:hover {\n                          background:  #2196f3 !important;\n                          color:  #ffffff !important;\n                      } .btn-default {\n                        background:   !important;\n                        border-color:   !important;\n                        color:   !important;\n                      } .btn-default:hover {\n                        background:   !important;\n                        color:   !important;\n                      } &quot;,&quot;Properties&quot;:&quot;&quot;,&quot;IsCustomTheme&quot;:true,&quot;Version&quot;:1,&quot;ThemeVersion&quot;:1}" FormWidth="900" GenerateInputFields="False" sap:VirtualizedContainerService.HintSize="575.2,562.4" sap2010:WorkflowViewState.IdRef="FormActivity_1" IsReadOnly="False" MaxColumnsForSchemaGeneration="6" RunDoBlockFirst="False" RunInIsolatedMode="False" SelectedButton="[button]">
+    <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="576,223.111111111111" sap2010:WorkflowViewState.IdRef="MultipleAssign_5">
+      <ui:MultipleAssign.AssignOperations>
+        <scg:List x:TypeArguments="ui:AssignOperation" Capacity="8">
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_13">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="x:Int32">[currentCard]</OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="x:Int32">0</InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_14">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="x:Int32">[totalCards]</OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="x:Int32">[cards.Count]</InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_15">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="x:String">[goodInterval]</OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="x:String">[(cards(0).LastReviewInterval*2).ToString]</InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_16">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="x:String">[easyInterval]</OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="x:String">[(cards(0).LastReviewInterval*3).ToString]</InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_17">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="x:String">[question]</OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="x:String">[cards(0).question]</InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+        </scg:List>
+      </ui:MultipleAssign.AssignOperations>
+    </ui:MultipleAssign>
+    <ufa:FormActivity Dismissed="{x:Null}" FormFieldsInputData="{x:Null}" FormFieldsOutputData="{x:Null}" FormTitle="{x:Null}" TimeoutInSeconds="{x:Null}" WindowPositionLeft="{x:Null}" WindowPositionTop="{x:Null}" DisableMaximizeButton="False" DisableMinimizeButton="False" DisplayName="Create Form" FormHeight="400" FormSchema="%[{&quot;label&quot;:&quot;HTML&quot;,&quot;tag&quot;:&quot;div&quot;,&quot;className&quot;:&quot;title&quot;,&quot;attrs&quot;:[{&quot;attr&quot;:&quot;&quot;,&quot;value&quot;:&quot;&quot;}],&quot;content&quot;:&quot;&lt;h1&gt;&lt;b&gt;💫Make it Stick💫&lt;/b&gt;&lt;/h1&gt;&quot;,&quot;refreshOnChange&quot;:false,&quot;key&quot;:&quot;html&quot;,&quot;type&quot;:&quot;htmlelement&quot;,&quot;calculateServer&quot;:false,&quot;input&quot;:false,&quot;tableView&quot;:false},{&quot;components&quot;:[{&quot;label&quot;:&quot;Decks&quot;,&quot;key&quot;:&quot;decks&quot;,&quot;components&quot;:[{&quot;label&quot;:&quot;HTML&quot;,&quot;tag&quot;:&quot;h2&quot;,&quot;className&quot;:&quot;question&quot;,&quot;attrs&quot;:[{&quot;attr&quot;:&quot;&quot;,&quot;value&quot;:&quot;&quot;}],&quot;content&quot;:&quot;{{data.question}}&quot;,&quot;refreshOnChange&quot;:true,&quot;key&quot;:&quot;question&quot;,&quot;type&quot;:&quot;htmlelement&quot;,&quot;calculateServer&quot;:false,&quot;input&quot;:false,&quot;tableView&quot;:false},{&quot;label&quot;:&quot;HTML&quot;,&quot;tag&quot;:&quot;h2&quot;,&quot;className&quot;:&quot;answer&quot;,&quot;attrs&quot;:[{&quot;attr&quot;:&quot;&quot;,&quot;value&quot;:&quot;&quot;}],&quot;content&quot;:&quot;{{data.answer}}&quot;,&quot;refreshOnChange&quot;:true,&quot;key&quot;:&quot;answerField&quot;,&quot;type&quot;:&quot;htmlelement&quot;,&quot;calculateServer&quot;:false,&quot;input&quot;:false,&quot;tableView&quot;:false},{&quot;columns&quot;:[{&quot;components&quot;:[{&quot;label&quot;:&quot;Edit&quot;,&quot;disableOnInvalid&quot;:true,&quot;tableView&quot;:false,&quot;key&quot;:&quot;edit&quot;,&quot;properties&quot;:{&quot;closeOnSubmit&quot;:&quot;false&quot;},&quot;custom&quot;:&quot;instance.emit('executeDoBlock', instance.component);&quot;,&quot;type&quot;:&quot;button&quot;,&quot;input&quot;:true,&quot;calculateServer&quot;:false,&quot;hideOnChildrenHidden&quot;:false,&quot;width&quot;:12}],&quot;width&quot;:3,&quot;offset&quot;:0,&quot;push&quot;:0,&quot;pull&quot;:0,&quot;size&quot;:&quot;xs&quot;},{&quot;components&quot;:[{&quot;label&quot;:&quot;Show Answer&quot;,&quot;disableOnInvalid&quot;:true,&quot;tableView&quot;:false,&quot;key&quot;:&quot;showAnswer&quot;,&quot;properties&quot;:{&quot;closeOnSubmit&quot;:&quot;false&quot;},&quot;customConditional&quot;:&quot;show = data.isBeforeAnswer;&quot;,&quot;custom&quot;:&quot;instance.emit('executeDoBlock', instance.component);&quot;,&quot;type&quot;:&quot;button&quot;,&quot;input&quot;:true,&quot;calculateServer&quot;:false,&quot;hideOnChildrenHidden&quot;:false,&quot;width&quot;:6},{&quot;columns&quot;:[{&quot;components&quot;:[{&quot;label&quot;:&quot;I failed (&lt;1m)&quot;,&quot;theme&quot;:&quot;danger&quot;,&quot;disableOnInvalid&quot;:true,&quot;tableView&quot;:false,&quot;key&quot;:&quot;review_again&quot;,&quot;properties&quot;:{&quot;closeOnSubmit&quot;:&quot;false&quot;},&quot;custom&quot;:&quot;instance.emit('executeDoBlock', instance.component);&quot;,&quot;type&quot;:&quot;button&quot;,&quot;input&quot;:true,&quot;calculateServer&quot;:false,&quot;hideOnChildrenHidden&quot;:false,&quot;width&quot;:12}],&quot;offset&quot;:0,&quot;push&quot;:0,&quot;pull&quot;:0,&quot;size&quot;:&quot;xs&quot;,&quot;width&quot;:5},{&quot;components&quot;:[{&quot;label&quot;:&quot;Good ()&quot;,&quot;theme&quot;:&quot;info&quot;,&quot;disableOnInvalid&quot;:true,&quot;tableView&quot;:false,&quot;key&quot;:&quot;review_good&quot;,&quot;properties&quot;:{&quot;closeOnSubmit&quot;:&quot;false&quot;},&quot;custom&quot;:&quot;instance.emit('executeDoBlock', instance.component);&quot;,&quot;type&quot;:&quot;button&quot;,&quot;input&quot;:true,&quot;calculateServer&quot;:false,&quot;hideOnChildrenHidden&quot;:false,&quot;width&quot;:12}],&quot;offset&quot;:0,&quot;push&quot;:0,&quot;pull&quot;:0,&quot;size&quot;:&quot;xs&quot;,&quot;width&quot;:5},{&quot;components&quot;:[{&quot;label&quot;:&quot;Easy! ()&quot;,&quot;theme&quot;:&quot;success&quot;,&quot;disableOnInvalid&quot;:true,&quot;tableView&quot;:false,&quot;key&quot;:&quot;easy&quot;,&quot;properties&quot;:{&quot;closeOnSubmit&quot;:&quot;false&quot;},&quot;custom&quot;:&quot;instance.emit('executeDoBlock', instance.component);&quot;,&quot;type&quot;:&quot;button&quot;,&quot;input&quot;:true,&quot;calculateServer&quot;:false,&quot;hideOnChildrenHidden&quot;:false,&quot;width&quot;:12}],&quot;size&quot;:&quot;xs&quot;,&quot;offset&quot;:0,&quot;push&quot;:0,&quot;pull&quot;:0,&quot;width&quot;:5}],&quot;tableView&quot;:false,&quot;key&quot;:&quot;columns2&quot;,&quot;customConditional&quot;:&quot;show = !data.isBeforeAnswer;&quot;,&quot;type&quot;:&quot;columns&quot;,&quot;calculateServer&quot;:false,&quot;input&quot;:false,&quot;label&quot;:&quot;Columns&quot;,&quot;width&quot;:12}],&quot;width&quot;:4,&quot;offset&quot;:0,&quot;push&quot;:0,&quot;pull&quot;:0,&quot;size&quot;:&quot;xs&quot;},{&quot;components&quot;:[{&quot;label&quot;:&quot;More ▼&quot;,&quot;disableOnInvalid&quot;:true,&quot;tableView&quot;:false,&quot;key&quot;:&quot;more&quot;,&quot;properties&quot;:{&quot;closeOnSubmit&quot;:&quot;false&quot;},&quot;custom&quot;:&quot;instance.emit('executeDoBlock', instance.component);&quot;,&quot;type&quot;:&quot;button&quot;,&quot;input&quot;:true,&quot;calculateServer&quot;:false,&quot;hideOnChildrenHidden&quot;:false,&quot;width&quot;:12}],&quot;size&quot;:&quot;xs&quot;,&quot;width&quot;:3,&quot;offset&quot;:0,&quot;push&quot;:0,&quot;pull&quot;:0}],&quot;autoAdjust&quot;:true,&quot;tableView&quot;:false,&quot;key&quot;:&quot;columns&quot;,&quot;type&quot;:&quot;columns&quot;,&quot;calculateServer&quot;:false,&quot;input&quot;:false,&quot;label&quot;:&quot;Columns&quot;}]},{&quot;label&quot;:&quot;Add&quot;,&quot;key&quot;:&quot;add&quot;,&quot;components&quot;:[]},{&quot;label&quot;:&quot;Browse&quot;,&quot;key&quot;:&quot;browse&quot;,&quot;components&quot;:[]},{&quot;label&quot;:&quot;Status&quot;,&quot;key&quot;:&quot;status&quot;,&quot;components&quot;:[]},{&quot;label&quot;:&quot;Sysnc&quot;,&quot;key&quot;:&quot;sysnc&quot;,&quot;components&quot;:[]}],&quot;key&quot;:&quot;tabs1&quot;,&quot;type&quot;:&quot;tabs&quot;,&quot;input&quot;:false,&quot;tableView&quot;:false,&quot;label&quot;:&quot;Tabs&quot;,&quot;calculateServer&quot;:false},{&quot;label&quot;:&quot;HTML&quot;,&quot;tag&quot;:&quot;style&quot;,&quot;attrs&quot;:[{&quot;attr&quot;:&quot;&quot;,&quot;value&quot;:&quot;&quot;}],&quot;content&quot;:&quot;.title {text-align: center;}\n.question {color: #414244;}\n.answer {color: #0067DF;}&quot;,&quot;refreshOnChange&quot;:false,&quot;key&quot;:&quot;html1&quot;,&quot;type&quot;:&quot;htmlelement&quot;,&quot;calculateServer&quot;:false,&quot;input&quot;:false,&quot;tableView&quot;:false}]" FormTheme="{}{&quot;Activities&quot;:[&quot;FORMS&quot;],&quot;Id&quot;:&quot;1621561435831&quot;,&quot;Name&quot;:&quot;Orchestrator&quot;,&quot;BaseCss&quot;:&quot;../../assets/css/themes/paper.bootstrap.min.css&quot;,&quot;ImageSrc&quot;:&quot;../../assets/themeicons/paper.png&quot;,&quot;OverrideCssUrl&quot;:&quot;&quot;,&quot;UserStyleOverrides&quot;:&quot;body , h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {\n                      font-family : Roboto !important;\n                    }table, .btn, .form-control {\n                      font-size : 13px !important;\n                     }h1 {\n                      font-size : 35px !important;\n                    }h2 {\n                      font-size : 29px !important;\n                    }h3 {\n                      font-size : 23px !important;\n                    }h4 {\n                      font-size : 17px !important;\n                    }h5 {\n                      font-size : 13px !important;\n                    }h6 {\n                      font-size : 11px !important;\n                    }body {\n      background:  #f1f6f8 !important;\n      font-size : 13px !important;\n      font-family : Roboto !important;\n      color : #666666 !important\n    } .panel-default {\n                        background:   !important;\n                        border-color :   !important;\n                      }\n                 .panel-default &gt; .panel-heading {\n                        background-color:  !important;\n                        color : #666666 !important\n                      }.btn-primary {\n                          background:  #2196f3 !important;\n                          border-color:  #ffffff !important;\n                          color:  #ffffff !important;\n                      } .btn-primary:hover {\n                          background:  #2196f3 !important;\n                          color:  #ffffff !important;\n                      } .btn-default {\n                        background:   !important;\n                        border-color:   !important;\n                        color:   !important;\n                      } .btn-default:hover {\n                        background:   !important;\n                        color:   !important;\n                      } &quot;,&quot;Properties&quot;:&quot;&quot;,&quot;IsCustomTheme&quot;:true,&quot;Version&quot;:1,&quot;ThemeVersion&quot;:1}" FormWidth="900" GenerateInputFields="False" sap:VirtualizedContainerService.HintSize="576,1127.11111111111" sap2010:WorkflowViewState.IdRef="FormActivity_1" IsReadOnly="False" MaxColumnsForSchemaGeneration="6" RunDoBlockFirst="False" RunInIsolatedMode="False" SelectedButton="[button]">
       <ufa:FormActivity.Body>
         <ActivityAction x:TypeArguments="scg:Dictionary(x:String, x:Object)">
-          <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="538.4,436" sap2010:WorkflowViewState.IdRef="Sequence_1">
+          <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="538.666666666667,1000.88888888889" sap2010:WorkflowViewState.IdRef="Sequence_1">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-            <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="496.8,92.8" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Warn" Message="[&quot;button: &quot; &amp; button]" />
-            <Switch x:TypeArguments="x:String" DisplayName="Switch" Expression="[button]" sap:VirtualizedContainerService.HintSize="496.8,210.4" sap2010:WorkflowViewState.IdRef="Switch`1_1">
-              <Sequence x:Key="showAnswer" sap:VirtualizedContainerService.HintSize="376,223.2" sap2010:WorkflowViewState.IdRef="Sequence_3">
+            <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="496.888888888889,92.8888888888889" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Warn" Message="[&quot;button: &quot; &amp; button]" />
+            <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="496.888888888889,92.8888888888889" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Warn" Message="[&quot;goodInterval: &quot; &amp; goodInterval]" />
+            <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="496.888888888889,92.8888888888889" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Warn" Message="[&quot;currentCard: &quot; &amp; currentCard]" />
+            <Switch x:TypeArguments="x:String" DisplayName="Switch" Expression="[button]" sap:VirtualizedContainerService.HintSize="496.888888888889,509.777777777778" sap2010:WorkflowViewState.IdRef="Switch`1_1">
+              <Sequence x:Key="showAnswer" sap:VirtualizedContainerService.HintSize="375.555555555556,253.333333333333" sap2010:WorkflowViewState.IdRef="Sequence_3">
                 <sap:WorkflowViewStateService.ViewState>
                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
                     <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
                   </scg:Dictionary>
                 </sap:WorkflowViewStateService.ViewState>
-                <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="333.6,130.4" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
+                <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="333.777777777778,160.888888888889" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
                   <ui:MultipleAssign.AssignOperations>
                     <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
                       <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_1">
@@ -139,20 +193,28 @@
                           <OutArgument x:TypeArguments="x:String">[answer]</OutArgument>
                         </ui:AssignOperation.To>
                         <ui:AssignOperation.Value>
-                          <InArgument x:TypeArguments="x:String">new answer</InArgument>
+                          <InArgument x:TypeArguments="x:String">[cards(currentCard).answer]</InArgument>
+                        </ui:AssignOperation.Value>
+                      </ui:AssignOperation>
+                      <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_9">
+                        <ui:AssignOperation.To>
+                          <OutArgument x:TypeArguments="x:Int32">[currentCard]</OutArgument>
+                        </ui:AssignOperation.To>
+                        <ui:AssignOperation.Value>
+                          <InArgument x:TypeArguments="x:Int32">[currentCard+1]</InArgument>
                         </ui:AssignOperation.Value>
                       </ui:AssignOperation>
                     </scg:List>
                   </ui:MultipleAssign.AssignOperations>
                 </ui:MultipleAssign>
               </Sequence>
-              <Sequence x:Key="review_again" sap:VirtualizedContainerService.HintSize="376,223.2" sap2010:WorkflowViewState.IdRef="Sequence_4">
+              <Sequence x:Key="review_again" sap:VirtualizedContainerService.HintSize="375.555555555556,253.333333333333" sap2010:WorkflowViewState.IdRef="Sequence_4">
                 <sap:WorkflowViewStateService.ViewState>
                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
                     <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                   </scg:Dictionary>
                 </sap:WorkflowViewStateService.ViewState>
-                <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="333.6,130.4" sap2010:WorkflowViewState.IdRef="MultipleAssign_2">
+                <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="333.777777777778,160.888888888889" sap2010:WorkflowViewState.IdRef="MultipleAssign_2">
                   <ui:MultipleAssign.AssignOperations>
                     <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
                       <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_3">
@@ -173,17 +235,25 @@
                           </InArgument>
                         </ui:AssignOperation.Value>
                       </ui:AssignOperation>
+                      <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_10">
+                        <ui:AssignOperation.To>
+                          <OutArgument x:TypeArguments="x:String">[question]</OutArgument>
+                        </ui:AssignOperation.To>
+                        <ui:AssignOperation.Value>
+                          <InArgument x:TypeArguments="x:String">[cards(currentCard).question]</InArgument>
+                        </ui:AssignOperation.Value>
+                      </ui:AssignOperation>
                     </scg:List>
                   </ui:MultipleAssign.AssignOperations>
                 </ui:MultipleAssign>
               </Sequence>
-              <Sequence x:Key="review_good" sap:VirtualizedContainerService.HintSize="376,223.2" sap2010:WorkflowViewState.IdRef="Sequence_5">
+              <Sequence x:Key="review_good" sap:VirtualizedContainerService.HintSize="375.555555555556,253.333333333333" sap2010:WorkflowViewState.IdRef="Sequence_5">
                 <sap:WorkflowViewStateService.ViewState>
                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
                     <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                   </scg:Dictionary>
                 </sap:WorkflowViewStateService.ViewState>
-                <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="333.6,130.4" sap2010:WorkflowViewState.IdRef="MultipleAssign_3">
+                <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="333.777777777778,160.888888888889" sap2010:WorkflowViewState.IdRef="MultipleAssign_3">
                   <ui:MultipleAssign.AssignOperations>
                     <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
                       <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_5">
@@ -204,17 +274,25 @@
                           </InArgument>
                         </ui:AssignOperation.Value>
                       </ui:AssignOperation>
+                      <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_11">
+                        <ui:AssignOperation.To>
+                          <OutArgument x:TypeArguments="x:String">[question]</OutArgument>
+                        </ui:AssignOperation.To>
+                        <ui:AssignOperation.Value>
+                          <InArgument x:TypeArguments="x:String">[cards(currentCard).question]</InArgument>
+                        </ui:AssignOperation.Value>
+                      </ui:AssignOperation>
                     </scg:List>
                   </ui:MultipleAssign.AssignOperations>
                 </ui:MultipleAssign>
               </Sequence>
-              <Sequence x:Key="review_easy" sap:VirtualizedContainerService.HintSize="376,223.2" sap2010:WorkflowViewState.IdRef="Sequence_6">
+              <Sequence x:Key="easy" sap:VirtualizedContainerService.HintSize="375.555555555556,253.333333333333" sap2010:WorkflowViewState.IdRef="Sequence_6">
                 <sap:WorkflowViewStateService.ViewState>
                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
                     <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                   </scg:Dictionary>
                 </sap:WorkflowViewStateService.ViewState>
-                <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="333.6,130.4" sap2010:WorkflowViewState.IdRef="MultipleAssign_4">
+                <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="333.777777777778,160.888888888889" sap2010:WorkflowViewState.IdRef="MultipleAssign_4">
                   <ui:MultipleAssign.AssignOperations>
                     <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
                       <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_7">
@@ -235,6 +313,14 @@
                           </InArgument>
                         </ui:AssignOperation.Value>
                       </ui:AssignOperation>
+                      <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_12">
+                        <ui:AssignOperation.To>
+                          <OutArgument x:TypeArguments="x:String">[question]</OutArgument>
+                        </ui:AssignOperation.To>
+                        <ui:AssignOperation.Value>
+                          <InArgument x:TypeArguments="x:String">[cards(currentCard).question]</InArgument>
+                        </ui:AssignOperation.Value>
+                      </ui:AssignOperation>
                     </scg:List>
                   </ui:MultipleAssign.AssignOperations>
                 </ui:MultipleAssign>
@@ -250,13 +336,22 @@
       </ufa:FormActivity.DelayBody>
       <ufa:FormActivity.FormFieldsCollection>
         <InOutArgument x:TypeArguments="x:String" x:Key="question">
-          <mva:VisualBasicReference x:TypeArguments="x:String" ExpressionText="allQuestions.Item(0).question" />
+          <mva:VisualBasicReference x:TypeArguments="x:String" ExpressionText="question" />
         </InOutArgument>
         <InOutArgument x:TypeArguments="x:String" x:Key="answer">
-          <mva:VisualBasicReference x:TypeArguments="x:String" ExpressionText="allQuestions.Item(0).answer" />
+          <mva:VisualBasicReference x:TypeArguments="x:String" ExpressionText="answer" />
         </InOutArgument>
         <InOutArgument x:TypeArguments="x:Boolean" x:Key="isBeforeAnswer">
           <mva:VisualBasicReference x:TypeArguments="x:Boolean" ExpressionText="isBeforeAnswer" />
+        </InOutArgument>
+        <InOutArgument x:TypeArguments="scg:IList(f:FlashcardApp)" x:Key="cards">
+          <mva:VisualBasicReference x:TypeArguments="scg:IList(f:FlashcardApp)" ExpressionText="cards" />
+        </InOutArgument>
+        <InOutArgument x:TypeArguments="x:String" x:Key="goodInterval">
+          <mva:VisualBasicReference x:TypeArguments="x:String" ExpressionText="goodInterval" />
+        </InOutArgument>
+        <InOutArgument x:TypeArguments="x:String" x:Key="easyInterval">
+          <mva:VisualBasicReference x:TypeArguments="x:String" ExpressionText="easyInterval" />
         </InOutArgument>
       </ufa:FormActivity.FormFieldsCollection>
     </ufa:FormActivity>
