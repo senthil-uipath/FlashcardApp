@@ -3,6 +3,7 @@
   "description": "Blank Process",
   "main": "Main.xaml",
   "dependencies": {
+    "UiPath.DataService.Activities": "[21.1.2]",
     "UiPath.Excel.Activities": "[2.10.4]",
     "UiPath.Form.Activities": "[1.2.1-preview]",
     "UiPath.Mail.Activities": "[1.10.4]",
@@ -10,7 +11,14 @@
     "UiPath.UIAutomation.Activities": "[21.4.3]"
   },
   "webServices": [],
-  "entitiesStores": [],
+  "entitiesStores": [
+    {
+      "serviceDocument": ".entities/EntitiesStore.json",
+      "tenantName": "DefaultTenant",
+      "namespace": "FlashcardApp",
+      "uniqueReference": "R7bkgX1U87gHaSgjMy2W5wVwQ5C1bGdzIvllzsyEijo="
+    }
+  ],
   "schemaVersion": "4.0",
   "studioVersion": "21.4.3.0",
   "projectVersion": "1.0.0",
@@ -51,6 +59,5 @@
   ],
   "isTemplate": false,
   "templateProjectData": {},
-  "publishData": {},
-  "targetFramework": "Legacy"
+  "publishData": {}
 }
