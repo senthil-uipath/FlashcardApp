@@ -1,6 +1,6 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="DataService_Add_Selected" mva:VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="1312,1248" sap2010:WorkflowViewState.IdRef="DataService_Add_Selected_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:f="clr-namespace:FlashcardApp;assembly=DataService.FlashcardApp" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:uda="clr-namespace:UiPath.DataService.Activities;assembly=UiPath.DataService.Activities.Core" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="DataService_Add_Selected" mva:VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="1312,1568" sap2010:WorkflowViewState.IdRef="DataService_Add_Selected_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:f="clr-namespace:FlashcardApp;assembly=DataService.FlashcardApp" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:uda="clr-namespace:UiPath.DataService.Activities;assembly=UiPath.DataService.Activities.Core" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <TextExpression.NamespacesForImplementation>
-    <scg:List x:TypeArguments="x:String" Capacity="27">
+    <scg:List x:TypeArguments="x:String" Capacity="29">
       <x:String>System.Activities</x:String>
       <x:String>System.Activities.Statements</x:String>
       <x:String>System.Activities.Expressions</x:String>
@@ -28,6 +28,8 @@
       <x:String>System.Runtime.InteropServices</x:String>
       <x:String>UiPath.DataService.Activities</x:String>
       <x:String>UiPath.Shared.Activities</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>System.Activities.DynamicUpdate</x:String>
     </scg:List>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -54,68 +56,86 @@
       <AssemblyReference>UiPath.DataService.Activities.Core</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="DataService_Add_Selected" sap:VirtualizedContainerService.HintSize="381.6,1043.2" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="DataService_Add_Selected" sap:VirtualizedContainerService.HintSize="458.4,1403.2" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
-      <Variable x:TypeArguments="x:String" Name="questionText" />
-      <Variable x:TypeArguments="x:String" Name="answerText" />
-      <Variable x:TypeArguments="f:FlashcardApp" Name="card" />
+      <Variable x:TypeArguments="x:String" Name="addAnother" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" DisplayName="Message Box" sap:VirtualizedContainerService.HintSize="340,60" sap2010:WorkflowViewState.IdRef="MessageBox_1" Text="[&quot;Select text for question&quot;]" />
-    <ui:CopySelectedText SendWindowMessages="{x:Null}" TimeoutMS="{x:Null}" DisplayName="Copy Selected Text" sap:VirtualizedContainerService.HintSize="340,22.4" sap2010:WorkflowViewState.IdRef="CopySelectedText_1">
-      <ui:CopySelectedText.Result>
-        <OutArgument x:TypeArguments="x:String">[questionText]</OutArgument>
-      </ui:CopySelectedText.Result>
-    </ui:CopySelectedText>
-    <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" DisplayName="Message Box" sap:VirtualizedContainerService.HintSize="340,60" sap2010:WorkflowViewState.IdRef="MessageBox_2" Text="[&quot;Select text for answer&quot;]" />
-    <ui:CopySelectedText SendWindowMessages="{x:Null}" TimeoutMS="{x:Null}" DisplayName="Copy Selected Text" sap:VirtualizedContainerService.HintSize="340,22.4" sap2010:WorkflowViewState.IdRef="CopySelectedText_2">
-      <ui:CopySelectedText.Result>
-        <OutArgument x:TypeArguments="x:String">[answerText]</OutArgument>
-      </ui:CopySelectedText.Result>
-    </ui:CopySelectedText>
-    <Assign sap:VirtualizedContainerService.HintSize="340,60" sap2010:WorkflowViewState.IdRef="Assign_1">
-      <Assign.To>
-        <OutArgument x:TypeArguments="f:FlashcardApp">[card]</OutArgument>
-      </Assign.To>
-      <Assign.Value>
-        <InArgument x:TypeArguments="f:FlashcardApp">[new FlashcardApp.FlashcardApp]</InArgument>
-      </Assign.Value>
-    </Assign>
-    <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="340,161.6" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
-      <ui:MultipleAssign.AssignOperations>
-        <scg:List x:TypeArguments="ui:AssignOperation" Capacity="8">
-          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_1">
-            <ui:AssignOperation.To>
-              <OutArgument x:TypeArguments="s:Nullable(x:Decimal)">[card.ReviewCount]</OutArgument>
-            </ui:AssignOperation.To>
-            <ui:AssignOperation.Value>
-              <InArgument x:TypeArguments="s:Nullable(x:Decimal)">[0]</InArgument>
-            </ui:AssignOperation.Value>
-          </ui:AssignOperation>
-          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_2">
-            <ui:AssignOperation.To>
-              <OutArgument x:TypeArguments="x:String">[card.question]</OutArgument>
-            </ui:AssignOperation.To>
-            <ui:AssignOperation.Value>
-              <InArgument x:TypeArguments="x:String">[questionText]</InArgument>
-            </ui:AssignOperation.Value>
-          </ui:AssignOperation>
-          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_3">
-            <ui:AssignOperation.To>
-              <OutArgument x:TypeArguments="x:String">[card.answer]</OutArgument>
-            </ui:AssignOperation.To>
-            <ui:AssignOperation.Value>
-              <InArgument x:TypeArguments="x:String">[answerText]</InArgument>
-            </ui:AssignOperation.Value>
-          </ui:AssignOperation>
-        </scg:List>
-      </ui:MultipleAssign.AssignOperations>
-    </ui:MultipleAssign>
-    <uda:CreateEntityRecord x:TypeArguments="f:FlashcardApp" ContinueOnError="False" DisplayName="Create Entity Record" ExpansionDepth="2" sap:VirtualizedContainerService.HintSize="340,224" sap2010:WorkflowViewState.IdRef="CreateEntityRecord`1_1" InputEntity="[card]" OutputEntity="[card]" TimeoutInMs="30000" />
-    <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" DisplayName="Message Box" sap:VirtualizedContainerService.HintSize="340,60" sap2010:WorkflowViewState.IdRef="MessageBox_3" Text="[&quot;Flashcard created as follows: &quot;+Environment.NewLine+Environment.NewLine+&quot;Question: &quot;+Environment.NewLine+questionText+Environment.NewLine+Environment.NewLine+&quot;Answer:&quot;+Environment.NewLine+answerText]" />
+    <ui:InterruptibleDoWhile DisplayName="Do While" sap:VirtualizedContainerService.HintSize="416.8,1310.4" sap2010:WorkflowViewState.IdRef="InterruptibleDoWhile_1">
+      <ui:InterruptibleDoWhile.Body>
+        <Sequence DisplayName="Add one flashcard" sap:VirtualizedContainerService.HintSize="381.6,1143.2" sap2010:WorkflowViewState.IdRef="Sequence_2">
+          <Sequence.Variables>
+            <Variable x:TypeArguments="f:FlashcardApp" Name="card" />
+            <Variable x:TypeArguments="x:String" Name="answerText" />
+            <Variable x:TypeArguments="x:String" Name="questionText" />
+          </Sequence.Variables>
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" DisplayName="Message Box" sap:VirtualizedContainerService.HintSize="340,60" sap2010:WorkflowViewState.IdRef="MessageBox_4" Text="[&quot;Select text for question&quot;]" />
+          <ui:CopySelectedText SendWindowMessages="{x:Null}" TimeoutMS="{x:Null}" DisplayName="Copy Selected Text" sap:VirtualizedContainerService.HintSize="340,22.4" sap2010:WorkflowViewState.IdRef="CopySelectedText_1">
+            <ui:CopySelectedText.Result>
+              <OutArgument x:TypeArguments="x:String">[questionText]</OutArgument>
+            </ui:CopySelectedText.Result>
+          </ui:CopySelectedText>
+          <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" DisplayName="Message Box" sap:VirtualizedContainerService.HintSize="340,60" sap2010:WorkflowViewState.IdRef="MessageBox_2" Text="[&quot;Select text for answer&quot;]" />
+          <ui:CopySelectedText SendWindowMessages="{x:Null}" TimeoutMS="{x:Null}" DisplayName="Copy Selected Text" sap:VirtualizedContainerService.HintSize="340,22.4" sap2010:WorkflowViewState.IdRef="CopySelectedText_2">
+            <ui:CopySelectedText.Result>
+              <OutArgument x:TypeArguments="x:String">[answerText]</OutArgument>
+            </ui:CopySelectedText.Result>
+          </ui:CopySelectedText>
+          <Assign sap:VirtualizedContainerService.HintSize="340,60" sap2010:WorkflowViewState.IdRef="Assign_1">
+            <Assign.To>
+              <OutArgument x:TypeArguments="f:FlashcardApp">[card]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="f:FlashcardApp">[new FlashcardApp.FlashcardApp]</InArgument>
+            </Assign.Value>
+          </Assign>
+          <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="340,161.6" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
+            <ui:MultipleAssign.AssignOperations>
+              <scg:List x:TypeArguments="ui:AssignOperation" Capacity="8">
+                <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_1">
+                  <ui:AssignOperation.To>
+                    <OutArgument x:TypeArguments="s:Nullable(x:Decimal)">[card.ReviewCount]</OutArgument>
+                  </ui:AssignOperation.To>
+                  <ui:AssignOperation.Value>
+                    <InArgument x:TypeArguments="s:Nullable(x:Decimal)">[0]</InArgument>
+                  </ui:AssignOperation.Value>
+                </ui:AssignOperation>
+                <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_2">
+                  <ui:AssignOperation.To>
+                    <OutArgument x:TypeArguments="x:String">[card.question]</OutArgument>
+                  </ui:AssignOperation.To>
+                  <ui:AssignOperation.Value>
+                    <InArgument x:TypeArguments="x:String">[questionText]</InArgument>
+                  </ui:AssignOperation.Value>
+                </ui:AssignOperation>
+                <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_3">
+                  <ui:AssignOperation.To>
+                    <OutArgument x:TypeArguments="x:String">[card.answer]</OutArgument>
+                  </ui:AssignOperation.To>
+                  <ui:AssignOperation.Value>
+                    <InArgument x:TypeArguments="x:String">[answerText]</InArgument>
+                  </ui:AssignOperation.Value>
+                </ui:AssignOperation>
+              </scg:List>
+            </ui:MultipleAssign.AssignOperations>
+          </ui:MultipleAssign>
+          <uda:CreateEntityRecord x:TypeArguments="f:FlashcardApp" ContinueOnError="False" DisplayName="Create Entity Record" ExpansionDepth="2" sap:VirtualizedContainerService.HintSize="340,224" sap2010:WorkflowViewState.IdRef="CreateEntityRecord`1_1" InputEntity="[card]" OutputEntity="[card]" TimeoutInMs="30000" />
+          <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" DisplayName="Message Box" sap:VirtualizedContainerService.HintSize="340,60" sap2010:WorkflowViewState.IdRef="MessageBox_3" Text="[&quot;Flashcard created as follows: &quot;+Environment.NewLine+Environment.NewLine+&quot;Question: &quot;+Environment.NewLine+questionText+Environment.NewLine+Environment.NewLine+&quot;Answer:&quot;+Environment.NewLine+answerText]" />
+          <ui:MessageBox Caption="{x:Null}" Buttons="YesNo" ChosenButton="[addAnother]" DisplayName="Message Box" sap:VirtualizedContainerService.HintSize="340,60" sap2010:WorkflowViewState.IdRef="MessageBox_5" Text="[&quot;Do you want to add another flashcard?&quot;]" />
+        </Sequence>
+      </ui:InterruptibleDoWhile.Body>
+      <ui:InterruptibleDoWhile.Condition>
+        <mva:VisualBasicValue x:TypeArguments="x:Boolean" ExpressionText="addAnother.Equals(&quot;Yes&quot;)" />
+      </ui:InterruptibleDoWhile.Condition>
+    </ui:InterruptibleDoWhile>
   </Sequence>
 </Activity>
