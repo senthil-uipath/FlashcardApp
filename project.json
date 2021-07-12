@@ -16,12 +16,12 @@
       "serviceDocument": ".entities/EntitiesStore.json",
       "tenantName": "DefaultTenant",
       "namespace": "FlashcardApp",
-      "uniqueReference": "/rReFIa2aW8lCI3cCDsRpZXJQUuSbwzyfmR1sonBvJo="
+      "uniqueReference": "fp2/0FW1xBy/tcdfiSYStvQzdjcUcjUfrMPG+eDI7Hg="
     }
   ],
   "schemaVersion": "4.0",
   "studioVersion": "21.4.3.0",
-  "projectVersion": "1.0.2",
+  "projectVersion": "1.0.5",
   "runtimeOptions": {
     "autoDispose": false,
     "isPausable": true,
